@@ -17,9 +17,11 @@ object ObjectOrientation extends App {
   // inheritance
   class Dog(val name: String) extends Animal // constructor definition
   val aDog = new Dog("Lassie")
-
-  // constructor arguments are NOT fields: need to put a val before the constructor argument
   aDog.name
+  // constructor arguments are NOT fields: need to put a val before the constructor argument
+
+
+
 
   // subtype polymorphism
   val aDeclaredAnimal: Animal = new Dog("Hachi")
