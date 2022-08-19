@@ -41,16 +41,53 @@ val ifexample = if(age > 18) age else 17
 
 def 方法名(参数列表)：返回结果类型={方法体}
 
+def + 函数名字（in: type, out: type） = {逻辑}
+
+
+main 方法, Unit = void
+```scala
+def main(args: Array[String]): Unit = {}
+```
+
+
 如果方法体只有一条语句，还可以省略方法体两边的大括号
 
-迭代器（Iterator）是一种提供了按顺序访问容器元素的数据结构。尽管构造一个迭代器与构造一个容器很类似，但迭代器并不是一个容器类，因为不能随机访问迭代器的元素，而只能按从前往后的顺序依次访问其元素。因此，迭代器常用于需要对容器进行一次遍历的场景。迭代器提供了两个基本操作：next和hasNext，可以很方便地实现对容器进行遍历。
-
-def + 函数名字（in: type, out: type） = {逻辑}
 ```scala
 def myFunction1(x:Int, y:String):String = {
   y + " " + x
 }
+
+def myFunction2(x:Int, y:String):String = y + " " + x
+
 ```
+
+迭代器（Iterator）是一种提供了按顺序访问容器元素的数据结构。尽管构造一个迭代器与构造一个容器很类似，但迭代器并不是一个容器类，因为不能随机访问迭代器的元素，而只能按从前往后的顺序依次访问其元素。因此，迭代器常用于需要对容器进行一次遍历的场景。迭代器提供了两个基本操作：next和hasNext，可以很方便地实现对容器进行遍历。
+
+```scala
+
+object HelloWorld {
+  def main(args: Array[String]): Unit = {
+    println("hello xpengkang")
+    println("every + - * / is the method in scala: ", 5.+(2222))
+
+    val myStrArr = Array("love", "like", "thumb up")
+
+    println(myStrArr.toString)
+
+    val tuple = ("bigdate", 3, 56565, 3.00)
+    // tuple can directly print in line
+    println(tuple)
+    var value = List("bigdata", "hadoop")
+    
+    // Iterator
+    val iterator1 = Iterator("hadoop", "spark", "flink")
+    while(iterator1.hasNext){
+      println(iterator1.next())
+    }
+  }
+}
+```
+
 
 ## 1.4 Unit 类型
 
@@ -88,6 +125,7 @@ Scala程序的入口点main方法就是定义在一个孤立对象里。单例�
 ```scala
 object MyObj extends App {
   //和 Java 一样，可以定义类和变量，成员方法
+  //object = public static void main(String[] args)
   class Order_tab {
     private val cnt = 10
     def count() = println(cnt + 1)
@@ -110,6 +148,7 @@ object MyObj extends App {
 }
 ```
 
+
 ## 2.2 trait
 
 scala 不同Java ，有trait 关键字，表示特质，用with 连接
@@ -128,6 +167,7 @@ scala 不同Java ，有trait 关键字，表示特质，用with 连接
 
 
 ## 2.3 case class
+
 case class 是一种轻量级的数据结构，
 类似Java的pojo类，但是不需要有参构造和重写toString方法。
 初始化可以不用new 关键字
@@ -149,8 +189,40 @@ case class 是一种轻量级的数据结构，
 
 
 
+## 2.4 exceptions
+
+对比Java和Scala 异常语法
+```java
+  try {
+    sout()
+  }catch (Exception e){
+    sout()
+  }
+  
+```
+
+```scala
+  try{
+    println(111)
+  }catch {
+    case e: Exception => "xxxxx"
+  }
+```
 
 
+## 2.5 generics 
+
+和Java类似 在[里面类型，generic], 如
+List[Int]
+
+```scala
+  val myList: List[Int] = List(1, 2, 3, 4, 5)
+  private val head: Int = myList.head
+  private val tail: List[Int] = myList.tail
+
+  println(head) // 1
+  println(tail) // List(2, 3, 4, 5)
+```
 
 
 

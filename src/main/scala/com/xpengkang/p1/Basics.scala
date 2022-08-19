@@ -1,17 +1,17 @@
-package com.xpengkang
+package com.xpengkang.p1
 
 /**
   * @Author: kang.peng
   * @Date: 2022/8/18 11:48 PM
   * @Version 1.0
   */
-object Basics extends App{
-  val age:Int = 33
+object Basics extends App {
+  val age: Int = 33
 
   val name = "tim"
   val age1 = 33
 
-  val ifexample = if(age > 18) age else 17
+  val ifexample = if (age > 18) age else 17
 
   val codeBlock = {
     // 代码块
@@ -20,33 +20,22 @@ object Basics extends App{
   }
 
   // functions
-  def myFunction1(x:Int, y:String):String = {
+  def myFunction1(x: Int, y: String): String = {
     y + " " + x
   }
 
 
   // 递归, 不使用loop, ITERATION
-  def myRecirtion(n: Int) : Int = {
-    if(n <= 1) 1
+  def myRecirtion(n: Int): Int = {
+    if (n <= 1) 1
     else n * myRecirtion(n - 1)
   }
 
   println("this is unit")
 
-  def myUnitFunction1():Unit = {
+  def myUnitFunction1(): Unit = {
     println("hello, Unit is equal to void")
   }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
