@@ -364,13 +364,16 @@ match case => 的用法很灵活，可以分解提取case class, tuples，列表
 
 ```scala
   case class OrderDetail(
-                        OrderId: Long,
-                        daytime: Long
+                          OrderId: Long,
+                          daytime: Long
                         )
-  val personGreeting = OrderDetail match {
-    case OrderDetail(n, a) => s" order ID is $n ， and today is  $a ."
-    case _ => "Something else"
+  val order1 = OrderDetail(111L, 100L)
+  val personGreeting = order1 match {
+  case OrderDetail(n, a) => s" order ID is $n ， and today is  $a ."
+  case _ => "Something else"
   }
+
+  println(personGreeting)
 
   // deconstructing tuples
   val aTuple = ("java", "scala")
@@ -388,8 +391,10 @@ match case => 的用法很灵活，可以分解提取case class, tuples，列表
   }
 ```
 
+# 3 ContextualAbstraction （Scala 3）
 
 
+Scala 3. 以上有些神奇的功能，项目环境还是Scala2.11 为主，暂时不更新
 
 
 

@@ -20,11 +20,13 @@ object PatternMatch extends App{
                         OrderId: Long,
                         daytime: Long
                         )
-
-  val personGreeting = OrderDetail match {
+  val order1 = OrderDetail(111L, 100L)
+  val personGreeting = order1 match {
     case OrderDetail(n, a) => s" order ID is $n ， and today is  $a ."
     case _ => "Something else"
   }
+
+  println(personGreeting)
 
   // deconstructing tuples
   val aTuple = ("java", "scala")
