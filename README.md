@@ -21,6 +21,10 @@ Scala还提供了一个Unit类型，类似Java中的void类型，表示“什么
 
 不同于Java的方括号，Scala使用圆括号来访问数组元素，索引也是从零开始。
 
+![img_1.png](img_1.png)
+
+新建一个类，就有这几个选项。这几个有什么区别？？？？
+
 ## 1.1 定义常量/变量
 
 scala：val age:Int = 33
@@ -223,6 +227,172 @@ List[Int]
   println(head) // 1
   println(tail) // List(2, 3, 4, 5)
 ```
+
+
+# p3 functional programming
+
+睡前发问：scala 是为etl 设计的吗？？？ 自带 map , flatmap, filter 函数
+
+## 3.1 apply
+
+函数 编程 = 所有的函数 是 函数类型的 实例 instance
+
+先看代码
+```scala
+package com.xpengkang.p3
+
+/**
+  * @Author: kang.peng
+  * @Date: 2022/8/19 8:24 AM
+  * @Version 1.0
+  */
+object FunctionalProgram extends App{
+
+  class Person(name : String) {
+    def apply(age: Int) = println(s"age is $age")
+  }
+  val bob = new Person("tim")
+//  age is 89
+//  age is 88
+  bob.apply(89)
+  bob(88)
+  
+  // 函数 编程 = 所有的函数 是 函数类型的 实例 instance
+  // 语法糖
+  val doubler: Function1[Int, Int] = (x:Int) => 2*x
+  doubler(4) // 8
+  println(doubler(8))  // 16
+  
+}
+
+```
+
+
+## 3.2 map & flatmap & filter
+
+map(x => x + 1) 
+
+=> 表示输入和输出， 类似Java里面的lambda表达式 （in）-> (out)
+
+```scala
+// highre-order functions, map
+  val mapList = List(1, 2,3).map(x => x + 1) // List(2, 3, 4)
+  println(mapList) // List(2, 3, 4)
+
+  // flatmap
+  val flatList: List[Int] = List(1, 2, 3).flatMap(x => List(x, 2 * x))
+  println(flatList)
+
+
+  private val value: List[Int] = List(1, 2, 3, 4, 5).filter(x => x == 3)
+  println(value)  //List(3)
+
+```
+
+上面等价于
+```scala
+  private val flatList: List[Int] = List(1, 2, 3).flatMap {
+    x => List(x, 2 * x)
+  }
+```
+
+## 3.3 _ 的用法
+(x => x == 3) 等价于  (_ == 3)
+```scala
+  private val value: List[Int] = List(1, 2, 3, 4, 5).filter(x => x == 3)
+  println(value)  //List(3)
+
+  private val value1: List[Int] = List(21, 22, 23, 24).filter(_ == 3)
+  println(value1)
+```
+
+备注：
+
+
+
+
+println(s"age is $age")
+字符串前面的s 是 自动生成的，代表这里有参数替换，
+不同与Java，Java 用 + 拼接的方法或者 %d
+
+
+技巧： 每次在变量后面加点var +  enter 回车能自动返回类型
+
+map(x => x + 1).var     
+
+
+# p4 Pattern Matching
+
+这个概念好像在Java没有
+
+关键字 match  case =>  
+
+这个方法会执行完所有的case ，如果没有匹配到任何结果，会抛出MatchError
+
+```scala
+object PatternMatch {
+  
+  val storeID = 1234
+  val storeName = storeID match {
+    case 1 => "kfc"
+    case 2 => "dell"
+    case 3 => "apple"
+    case _ => "third class grand"
+  }
+  println(storeName)
+  
+}
+```
+上面方法没有main 是无法执行的，执行的是extencs App 可以直接执行。
+改为：
+
+```scala
+object PatternMatch extends App{
+  
+  val storeID = 1234
+  val storeName = storeID match {
+    case 1 => "kfc"
+    case 2 => "dell"
+    case 3 => "apple"
+    case _ => "third class grand"
+  }
+  println(storeName)
+}
+```
+
+match case => 的用法很灵活，可以分解提取case class, tuples，列表的字段
+
+```scala
+  case class OrderDetail(
+                        OrderId: Long,
+                        daytime: Long
+                        )
+  val personGreeting = OrderDetail match {
+    case OrderDetail(n, a) => s" order ID is $n ， and today is  $a ."
+    case _ => "Something else"
+  }
+
+  // deconstructing tuples
+  val aTuple = ("java", "scala")
+  val bandDescription = aTuple match {
+    case (java, flink) => s"$java and $flink"
+    case (java, scala) => "true"
+    case _ => "others ======"
+  }
+
+  // decomposing lists
+  val aList = List(1,2,3)
+  val listDescription = aList match {
+    case List(_, 2, _) => "List containing 2 on its second position"
+    case _ => "unknown list"
+  }
+```
+
+
+
+
+
+
 
 
 
